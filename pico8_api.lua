@@ -53,6 +53,17 @@ end
 function camera(x, y)
 end
 
+--- Draw a filled circle at x,y with radius r.
+---
+--- If r is negative, the circle is not drawn.
+---
+--- @param x number
+--- @param y number
+--- @param r number
+--- @param col number color, optional
+function circfill(x, y, r, col)
+end
+
 --- Clear the screen and reset the clipping rectangle.
 --- @param col number optional, default: black
 function cls(col)
@@ -176,7 +187,6 @@ end
 --- @param col number color, optional
 function rect(x0, y0, x1, y1, col)
 end
-
 
 --- Draw a filled rectangle with corners at (X0, Y0), (X1, Y1).
 --- @param x0 number top-left corner
