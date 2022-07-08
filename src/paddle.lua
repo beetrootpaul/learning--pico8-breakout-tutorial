@@ -8,7 +8,6 @@ paddle = {
 paddle.x = u.viewport_size_px / 2 - paddle.w / 2
 paddle.y = u.viewport_size_px - paddle._bottom_gap - paddle.h
 
--- TODO stop paddle on screen edges
 function paddle:update()
     self._dx = 0.5 * self._dx
     if btn(u.buttons.l) then
@@ -18,6 +17,7 @@ function paddle:update()
         self._dx = 5
     end
     self.x = self.x + self._dx
+    self.x = mid(0, self.x, u.viewport_size_px - 1 - paddle.w)
 end
 
 function paddle:draw()
