@@ -1,8 +1,8 @@
 ball = {
     _x = 10,
     _y = 10,
-    _dx = 2,
-    _dy = 4,
+    _dx = 1,
+    _dy = 2,
     _r = 2,
     _color = u.colors.red,
 }

@@ -2,7 +2,7 @@ function _init()
     cls()
 end
 
-function _update()
+function _update60()
     d:update()
     paddle:update()
     ball:update()

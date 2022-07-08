@@ -11,10 +11,10 @@ paddle.y = u.viewport_size_px - paddle._bottom_gap - paddle.h
 function paddle:update()
     self._dx = 0.5 * self._dx
     if btn(u.buttons.l) then
-        self._dx = -5
+        self._dx = -2.5
     end
     if btn(u.buttons.r) then
-        self._dx = 5
+        self._dx = 2.5
     end
     self.x = self.x + self._dx
     self.x = mid(0, self.x, u.viewport_size_px - 1 - paddle.w)
