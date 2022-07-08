@@ -8,6 +8,13 @@
 --
 
 
+--- Returns the absolute (positive) value of x
+---
+--- @param x number
+--- @return number
+function abs(x)
+end
+
 --- Add value VAL to the end of table TBL. Equivalent to: TBL[#TBL + 1] = VAL
 ---
 --- If index is given then the element is inserted at that position.
@@ -51,6 +58,28 @@ end
 --- @param x number, optional in pair with y
 --- @param y number, optional in pair with x
 function camera(x, y)
+end
+
+--- Draw a circle at x,y with radius r.
+---
+--- If r is negative, the circle is not drawn.
+---
+--- @param x number
+--- @param y number
+--- @param r number
+--- @param col number color, optional
+function circ(x, y, r, col)
+end
+
+--- Draw a filled circle at x,y with radius r.
+---
+--- If r is negative, the circle is not drawn.
+---
+--- @param x number
+--- @param y number
+--- @param r number
+--- @param col number color, optional
+function circfill(x, y, r, col)
 end
 
 --- Clear the screen and reset the clipping rectangle.
@@ -110,7 +139,20 @@ end
 
 --- Returns the floor value of a parameter
 --- @param x number
+--- @return number
 function flr(x)
+end
+
+--- Draw a line from (X0, Y0) to (X1, Y1).
+---
+--- If (X1, Y1) are not given, the end of the last drawn line is used.
+---
+--- @param x0 number
+--- @param y0 number
+--- @param x1 number optional in pair with y1
+--- @param y1 number optional in pair with x1
+--- @param col number color, optional
+function line(x0, y0, x1, y1, col)
 end
 
 --- Draw section of map (starting from CELL_X, CELL_Y) at screen position SX, SY (pixels).
@@ -127,7 +169,16 @@ end
 --- Returns the maximum value of parameters
 --- @param x number
 --- @param y number
+--- @return number
 function max(x, y)
+end
+
+--- Returns the middle value of parameters
+--- @param x number
+--- @param y number
+--- @param z number
+--- @return number
+function mid(x, y, z)
 end
 
 --- Returns the minimum value of parameters
@@ -155,7 +206,6 @@ end
 --- Unlike ALL(), PAIRS() iterates over every item regardless of indexing scheme. Order is not guaranteed.
 ---
 --- @param tbl table
---- @return any, any key and value
 function pairs(tbl)
 end
 
@@ -176,7 +226,6 @@ end
 --- @param col number color, optional
 function rect(x0, y0, x1, y1, col)
 end
-
 
 --- Draw a filled rectangle with corners at (X0, Y0), (X1, Y1).
 --- @param x0 number top-left corner
@@ -217,4 +266,22 @@ end
 --- @param flip_x boolean
 --- @param flip_y boolean
 function spr(n, x, y, w, h, flip_x, flip_y)
+end
+
+--- Convert VAL to a string.
+---
+--- FORMAT_FLAGS is a bitfield:
+---
+---  - 0x1: Write the raw hexadecimal value of numbers, functions or tables.
+---
+---  - 0x2: Write VAL as a signed 32-bit integer by shifting it left by 16 bits.
+---
+--- TOSTR(NIL) returns "[nil]"
+---
+--- TOSTR() returns ""
+---
+--- @param val any
+--- @param format_flags number bitfield, optional
+--- @return string
+function tostr(val, format_flags)
 end
