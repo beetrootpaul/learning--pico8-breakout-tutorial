@@ -1,11 +1,14 @@
 paddle = {
-    _w = 24,
-    _h = 3,
+    w = 24,
+    h = 4,
+    _bottom_gap = 12,
     _dx = 0,
+    _color = u.colors.light_grey,
 }
-paddle._x = u.viewport_size_px / 2 - paddle._w / 2
-paddle._y = u.viewport_size_px - 5 - paddle._h
+paddle.x = u.viewport_size_px / 2 - paddle.w / 2
+paddle.y = u.viewport_size_px - paddle._bottom_gap - paddle.h
 
+-- TODO stop paddle on screen edges
 function paddle:update()
     self._dx = 0.5 * self._dx
     if btn(u.buttons.l) then
@@ -14,13 +17,13 @@ function paddle:update()
     if btn(u.buttons.r) then
         self._dx = 5
     end
-    self._x = self._x + self._dx
+    self.x = self.x + self._dx
 end
 
 function paddle:draw()
     rectfill(
-        self._x, self._y,
-        self._x + self._w, self._y + self._h,
-        u.colors.white
+        self.x, self.y,
+        self.x + self.w, self.y + self.h,
+        self._color
     )
 end

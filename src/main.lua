@@ -3,12 +3,14 @@ function _init()
 end
 
 function _update()
-    ball:update()
+    d:update()
     paddle:update()
+    ball:update()
 end
 
 function _draw()
     cls(u.colors.dark_blue)
-    ball:draw()
     paddle:draw()
+    ball:draw()
+    d:draw()
 end
