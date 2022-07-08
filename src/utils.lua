@@ -1,3 +1,5 @@
+local text_height_px = 5
+
 local utils = {
     buttons = {
         l = 0,
@@ -8,6 +10,7 @@ local utils = {
         x = 5,
     },
     colors = {
+        black = 0,
         dark_blue = 1,
         purple = 2,
         dark_green = 3,
@@ -20,14 +23,21 @@ local utils = {
         yellow = 10,
         lime = 11,
         blue = 12,
+        violet_grey = 13,
         pink = 14,
         salmon = 15,
     },
+    measure_text_width = function(text)
+        local y_to_print_outside_screen = -text_height_px
+        return print(text, 0, y_to_print_outside_screen)
+    end,
+    screen_size_px = 128,
     sfxs = {
         ball_wall_bounce = 0,
         ball_paddle_bounce = 1,
+        live_lost = 2,
     },
-    viewport_size_px = 128,
+    text_height_px = text_height_px,
 }
 
 u = utils

@@ -1,5 +1,9 @@
 collisions = {}
 
+-- -- -- -- -- -- --
+-- public methods --
+-- -- -- -- -- -- --
+
 function collisions:is_ball_about_to_collide(params)
     local ball = {
         next_x = params.ball_next_x,

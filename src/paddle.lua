@@ -1,29 +1,47 @@
 paddle = {
+    -- -- -- -- -- -- -- --
+    -- public properties --
+    -- -- -- -- -- -- -- --
     w = 24,
     h = 4,
-    _bottom_gap = 12,
-    _dx = 0,
-    _color = u.colors.light_grey,
+    x = nil,
+    y = nil,
 }
-paddle.x = u.viewport_size_px / 2 - paddle.w / 2
-paddle.y = u.viewport_size_px - paddle._bottom_gap - paddle.h
+
+-- -- -- -- -- -- -- --
+-- private variables --
+-- -- -- -- -- -- -- --
+
+local bottom_gap = 12
+local dx = 0
+local color = u.colors.light_grey
+
+-- -- -- -- -- -- --
+-- public methods --
+-- -- -- -- -- -- --
+
+function paddle:init()
+    dx = 0
+    self.x = u.screen_size_px / 2 - self.w / 2
+    self.y = u.screen_size_px - bottom_gap - self.h
+end
 
 function paddle:update()
-    self._dx = 0.5 * self._dx
+    dx = 0.5 * dx
     if btn(u.buttons.l) then
-        self._dx = -2.5
+        dx = -2.5
     end
     if btn(u.buttons.r) then
-        self._dx = 2.5
+        dx = 2.5
     end
-    self.x = self.x + self._dx
-    self.x = mid(0, self.x, u.viewport_size_px - 1 - paddle.w)
+    self.x = self.x + dx
+    self.x = mid(0, self.x, u.screen_size_px - 1 - paddle.w)
 end
 
 function paddle:draw()
     rectfill(
         self.x, self.y,
         self.x + self.w, self.y + self.h,
-        self._color
+        color
     )
 end

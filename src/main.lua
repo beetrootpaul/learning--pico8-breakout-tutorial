@@ -1,16 +1,19 @@
 function _init()
-    cls()
+    game_state:init()
 end
 
 function _update60()
     d:update()
-    paddle:update()
-    ball:update()
+    game_state:update()
 end
 
 function _draw()
-    cls(u.colors.dark_blue)
-    paddle:draw()
-    ball:draw()
+    game_state:draw()
     d:draw()
 end
+
+-- TODO game states: start
+-- TODO start => press x to start
+-- TODO paddle hit => 1 point
+-- TODO status bar with points
+-- TODO screen.game_area.x/y/w/h to offset after status bar is added
