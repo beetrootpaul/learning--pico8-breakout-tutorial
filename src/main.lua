@@ -11,3 +11,8 @@ function _draw()
     game_state:draw()
     d:draw()
 end
+
+-- TODO sticky paddle on every live
+-- TODO start direction taken from paddle movement
+-- TODO start direction indicator
+

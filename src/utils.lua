@@ -34,7 +34,8 @@ local utils = {
     screen_edge_length = 128,
     sfxs = {
         ball_wall_bounce = 0,
-        ball_paddle_bounce = 1,
+        ball_paddle_bounce = 0,
+        ball_brick_bounce = 1,
         live_lost = 2,
     },
     text_height_px = text_height_px,

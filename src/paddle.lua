@@ -14,6 +14,7 @@ paddle = {
 
 local bottom_gap = 12
 local dx = 0
+local max_dx = 3
 local color = u.colors.light_grey
 
 -- -- -- -- -- -- --
@@ -29,10 +30,10 @@ end
 function paddle:update()
     dx = 0.5 * dx
     if btn(u.buttons.l) then
-        dx = -2.5
+        dx = -max_dx
     end
     if btn(u.buttons.r) then
-        dx = 2.5
+        dx = max_dx
     end
     d:add_message("p.dx=" .. dx)
     self.x = self.x + dx

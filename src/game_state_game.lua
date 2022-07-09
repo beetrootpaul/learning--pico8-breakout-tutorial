@@ -5,6 +5,7 @@ game_state_game = {}
 -- -- -- -- -- -- --
 
 function game_state_game:init()
+    bricks:init()
     paddle:init()
     ball:init()
     lives:init()
@@ -19,6 +20,7 @@ end
 function game_state_game:draw()
     cls()
     screen_game_area:draw()
+    bricks:draw()
     paddle:draw()
     ball:draw()
     status_bar:draw()

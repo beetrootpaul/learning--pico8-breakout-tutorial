@@ -34,13 +34,13 @@ function debug:draw()
         return
     end
     for ln in all(lines) do
-        line(ln.x0, ln.y0, ln.x1, ln.y1, u.colors.orange)
+        line(ln.x0, ln.y0, ln.x1, ln.y1, u.colors.white)
     end
     for cmark in all(circle_markers) do
-        circ(cmark.x, cmark.y, cmark.r, u.colors.orange)
+        circ(cmark.x, cmark.y, cmark.r, u.colors.white)
     end
     for i, msg in pairs(messages) do
-        print(msg, messages_offset_x, messages_offset_y + i * (u.text_height_px + 1), u.colors.orange)
+        print(msg, messages_offset_x, messages_offset_y + i * (u.text_height_px + 1), u.colors.white)
     end
 end
 
