@@ -1,60 +1,90 @@
-ball = {
-    _x = 10,
-    _y = 10,
-    _dx = 2,
-    _dy = 4,
-    _r = 2,
-    _color = u.colors.red,
-}
+ball = {}
 
+-- -- -- -- -- -- -- --
+-- private variables --
+-- -- -- -- -- -- -- --
+
+local x
+local y
+local dx
+local dy
+local r = 2
+local color = u.colors.orange
 local has_collided_in_prev_frame = false
 
-function ball:update()
-    local next_x = self._x + self._dx
-    local next_y = self._y + self._dy
+-- -- -- -- -- -- --
+-- public methods --
+-- -- -- -- -- -- --
 
-    if next_x < 0 or next_x > u.viewport_size_px - 1 then
-        self._dx = -self._dx
-        next_x = mid(0, next_x, u.viewport_size_px - 1)
+function ball:init()
+    x = 10
+    y = 10
+    dx = 1
+    dy = 2
+end
+
+function ball:update()
+    local next_x = x + dx
+    local next_y = y + dy
+
+    if next_y + r > screen_game_area.h - 1 then
+        lives:lose_one()
+        sfx(u.sfxs.live_lost)
+        -- TODO Should state management happen here, inside ball's code?
+        if lives:is_any_left() then
+            -- TODO here we refer to ball and paddle explicitly, and …
+            ball:init()
+            paddle:init()
+        else
+            -- TODO … and here we have them hidden inside game state
+            game_state:enter_state_over()
+        end
+        return
+    end
+
+    if next_x - r < 0 or next_x + r > u.screen_edge_length - 1 then
+        dx = -dx
+        next_x = mid(0, next_x, u.screen_edge_length - 1)
         sfx(u.sfxs.ball_wall_bounce)
     end
-    if next_y < 0 or next_y > u.viewport_size_px - 1 then
-        self._dy = -self._dy
-        next_y = mid(0, next_y, u.viewport_size_px - 1)
+    if next_y - r < 0 then
+        dy = -dy
+        next_y = mid(0, next_y, screen_game_area.h - 1)
         sfx(u.sfxs.ball_wall_bounce)
     end
 
     local will_collide = collisions:is_ball_about_to_collide({
         ball_next_x = next_x, ball_next_y = next_y,
-        ball_r = self._r,
+        ball_r = r,
         target_x = paddle.x, target_y = paddle.y,
         target_w = paddle.w, target_h = paddle.h,
     })
     local bounce_horizontally = collisions:should_bounce_ball_horizontally({
-        ball_x = self._x, ball_y = self._y,
-        ball_r = self._r,
+        ball_x = x, ball_y = y,
+        ball_r = r,
         target_x = paddle.x, target_y = paddle.y,
         target_w = paddle.w, target_h = paddle.h,
     })
     if will_collide then
         if not has_collided_in_prev_frame then
+            score:add_point()
             sfx(u.sfxs.ball_paddle_bounce)
         end
         if bounce_horizontally then
             if next_x < paddle.x + paddle.w / 2 then
-                self._dx = -abs(self._dx)
-                next_x = min(next_x, paddle.x - 1) + self._dx
+                dx = -abs(dx)
+                next_x = min(next_x, paddle.x - 1) + dx
             else
-                self._dx = abs(self._dx)
-                next_x = max(paddle.x + paddle.w + 1, next_x) + self._dx
+                dx = abs(dx)
+                next_x = max(paddle.x + paddle.w + 1, next_x) + dx
             end
         else
             if next_y < paddle.y + paddle.h / 2 then
-                self._dy = -abs(self._dy)
-                next_y = min(next_y, paddle.y - 1) + self._dy
+                dy = -abs(dy)
+                next_y = min(next_y, paddle.y - 1) + dy
             else
-                self._dy = abs(self._dy)
-                next_y = max(paddle.y + paddle.h + 1, next_y) + self._dy
+                dy = abs(dy)
+                next_y = max(paddle.y + paddle.h + 1, next_y) + dy
             end
         end
         has_collided_in_prev_frame = true
@@ -62,10 +92,10 @@ function ball:update()
         has_collided_in_prev_frame = false
     end
 
-    self._x = next_x
-    self._y = next_y
+    x = next_x
+    y = next_y
 end
 
 function ball:draw()
-    circfill(self._x, self._y, self._r, self._color)
+    circfill(x, screen_game_area.offset_y + y, r, color)
 end

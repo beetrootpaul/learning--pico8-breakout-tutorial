@@ -1,16 +1,13 @@
 function _init()
-    cls()
+    game_state:init()
 end
 
-function _update()
+function _update60()
     d:update()
-    paddle:update()
-    ball:update()
+    game_state:update()
 end
 
 function _draw()
-    cls(u.colors.dark_blue)
-    paddle:draw()
-    ball:draw()
+    game_state:draw()
     d:draw()
 end

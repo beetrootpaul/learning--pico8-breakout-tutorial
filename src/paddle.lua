@@ -1,29 +1,48 @@
 paddle = {
+    -- -- -- -- -- -- -- --
+    -- public properties --
+    -- -- -- -- -- -- -- --
     w = 24,
     h = 4,
-    _bottom_gap = 12,
-    _dx = 0,
-    _color = u.colors.light_grey,
+    x = nil,
+    y = nil,
 }
-paddle.x = u.viewport_size_px / 2 - paddle.w / 2
-paddle.y = u.viewport_size_px - paddle._bottom_gap - paddle.h
 
--- TODO stop paddle on screen edges
+-- -- -- -- -- -- -- --
+-- private variables --
+-- -- -- -- -- -- -- --
+
+local bottom_gap = 12
+local dx = 0
+local color = u.colors.light_grey
+
+-- -- -- -- -- -- --
+-- public methods --
+-- -- -- -- -- -- --
+
+function paddle:init()
+    dx = 0
+    self.x = u.screen_edge_length / 2 - self.w / 2
+    self.y = screen_game_area.h - bottom_gap - self.h
+end
+
 function paddle:update()
-    self._dx = 0.5 * self._dx
+    dx = 0.5 * dx
     if btn(u.buttons.l) then
-        self._dx = -5
+        dx = -2.5
     end
     if btn(u.buttons.r) then
-        self._dx = 5
+        dx = 2.5
     end
-    self.x = self.x + self._dx
+    d:add_message("p.dx=" .. dx)
+    self.x = self.x + dx
+    self.x = mid(0, self.x, u.screen_edge_length - 1 - paddle.w)
 end
 
 function paddle:draw()
     rectfill(
-        self.x, self.y,
-        self.x + self.w, self.y + self.h,
-        self._color
+        self.x, screen_game_area.offset_y + self.y,
+        self.x + self.w, screen_game_area.offset_y + self.y + self.h,
+        color
     )
 end
