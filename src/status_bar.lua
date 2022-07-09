@@ -10,11 +10,15 @@ function status_bar:draw()
 
     local heart = "♥"
     local heart_w = u.measure_text_width(heart)
-    for h=1,lives.max do
+    for h = 1, lives.max do
         local color = u.colors.purple
         if h > lives.left then
             color = u.colors.dark_grey
         end
-        print(heart, margin + (h-1) * heart_w, margin, color)
+        print(heart, margin + (h - 1) * heart_w, margin, color)
     end
+
+    local score_text = "score " .. score.points
+    local score_text_w = u.measure_text_width(score_text)
+    print(score_text, u.screen_size_px - margin - score_text_w, margin, u.colors.light_grey)
 end

@@ -67,6 +67,7 @@ function ball:update()
     })
     if will_collide then
         if not has_collided_in_prev_frame then
+            score:add_point()
             sfx(u.sfxs.ball_paddle_bounce)
         end
         if bounce_horizontally then

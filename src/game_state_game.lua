@@ -8,6 +8,7 @@ function game_state_game:init()
     paddle:init()
     ball:init()
     lives:init()
+    score:init()
 end
 
 function game_state_game:update()
