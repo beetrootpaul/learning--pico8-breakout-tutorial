@@ -1,12 +1,23 @@
 status_bar = {}
 
+-- -- -- -- -- -- -- --
+-- private variables --
+-- -- -- -- -- -- -- --
+
+local margin = 2
+
+-- -- -- -- -- -- -- --
+-- public properties --
+-- -- -- -- -- -- -- --
+
+status_bar.h = margin + u.text_height_px + margin
+
 -- -- -- -- -- -- --
 -- public methods --
 -- -- -- -- -- -- --
 
 function status_bar:draw()
-    local margin = 2
-    rectfill(0, 0, u.screen_size_px - 1, u.text_height_px + 2 * margin - 1, u.colors.violet_grey)
+    rectfill(0, 0, u.screen_edge_length - 1, status_bar.h - 1, u.colors.violet_grey)
 
     local heart = "♥"
     local heart_w = u.measure_text_width(heart)
@@ -20,5 +31,5 @@ function status_bar:draw()
 
     local score_text = "score " .. score.points
     local score_text_w = u.measure_text_width(score_text)
-    print(score_text, u.screen_size_px - margin - score_text_w, margin, u.colors.light_grey)
+    print(score_text, u.screen_edge_length - margin - score_text_w, margin, u.colors.light_grey)
 end

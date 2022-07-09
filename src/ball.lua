@@ -9,7 +9,7 @@ local y
 local dx
 local dy
 local r = 2
-local color = u.colors.red
+local color = u.colors.orange
 local has_collided_in_prev_frame = false
 
 -- -- -- -- -- -- --
@@ -27,7 +27,7 @@ function ball:update()
     local next_x = x + dx
     local next_y = y + dy
 
-    if next_y + r > u.screen_size_px - 1 then
+    if next_y + r > screen_game_area.h - 1 then
         lives:lose_one()
         sfx(u.sfxs.live_lost)
         -- TODO Should state management happen here, inside ball's code?
@@ -42,14 +42,14 @@ function ball:update()
         return
     end
 
-    if next_x - r < 0 or next_x + r > u.screen_size_px - 1 then
+    if next_x - r < 0 or next_x + r > u.screen_edge_length - 1 then
         dx = -dx
-        next_x = mid(0, next_x, u.screen_size_px - 1)
+        next_x = mid(0, next_x, u.screen_edge_length - 1)
         sfx(u.sfxs.ball_wall_bounce)
     end
     if next_y - r < 0 then
         dy = -dy
-        next_y = mid(0, next_y, u.screen_size_px - 1)
+        next_y = mid(0, next_y, screen_game_area.h - 1)
         sfx(u.sfxs.ball_wall_bounce)
     end
 
@@ -97,5 +97,5 @@ function ball:update()
 end
 
 function ball:draw()
-    circfill(x, y, r, color)
+    circfill(x, screen_game_area.offset_y + y, r, color)
 end

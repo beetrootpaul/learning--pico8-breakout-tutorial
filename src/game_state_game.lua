@@ -17,7 +17,8 @@ function game_state_game:update()
 end
 
 function game_state_game:draw()
-    cls(u.colors.dark_blue)
+    cls()
+    screen_game_area:draw()
     paddle:draw()
     ball:draw()
     status_bar:draw()

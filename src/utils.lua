@@ -31,7 +31,7 @@ local utils = {
         local y_to_print_outside_screen = -text_height_px
         return print(text, 0, y_to_print_outside_screen)
     end,
-    screen_size_px = 128,
+    screen_edge_length = 128,
     sfxs = {
         ball_wall_bounce = 0,
         ball_paddle_bounce = 1,

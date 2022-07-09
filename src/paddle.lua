@@ -22,8 +22,8 @@ local color = u.colors.light_grey
 
 function paddle:init()
     dx = 0
-    self.x = u.screen_size_px / 2 - self.w / 2
-    self.y = u.screen_size_px - bottom_gap - self.h
+    self.x = u.screen_edge_length / 2 - self.w / 2
+    self.y = screen_game_area.h - bottom_gap - self.h
 end
 
 function paddle:update()
@@ -34,14 +34,15 @@ function paddle:update()
     if btn(u.buttons.r) then
         dx = 2.5
     end
+    d:add_message("p.dx=" .. dx)
     self.x = self.x + dx
-    self.x = mid(0, self.x, u.screen_size_px - 1 - paddle.w)
+    self.x = mid(0, self.x, u.screen_edge_length - 1 - paddle.w)
 end
 
 function paddle:draw()
     rectfill(
-        self.x, self.y,
-        self.x + self.w, self.y + self.h,
+        self.x, screen_game_area.offset_y + self.y,
+        self.x + self.w, screen_game_area.offset_y + self.y + self.h,
         color
     )
 end

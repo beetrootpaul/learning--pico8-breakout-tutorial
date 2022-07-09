@@ -12,6 +12,7 @@ __lua__
 #include src/game_state_over.lua
 #include src/game_state.lua
 #include src/status_bar.lua
+#include src/screen_game_area.lua
 #include src/lives.lua
 #include src/score.lua
 #include src/collisions.lua

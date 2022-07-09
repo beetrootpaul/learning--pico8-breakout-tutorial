@@ -6,6 +6,8 @@ d = debug
 -- -- -- -- -- -- -- --
 
 local enabled = false
+local messages_offset_x = 1
+local messages_offset_y = 8
 local messages = {}
 local lines = {}
 local circle_markers = {}
@@ -37,8 +39,8 @@ function debug:draw()
     for cmark in all(circle_markers) do
         circ(cmark.x, cmark.y, cmark.r, u.colors.orange)
     end
-    for msg in all(messages) do
-        print(msg, u.colors.orange)
+    for i, msg in pairs(messages) do
+        print(msg, messages_offset_x, messages_offset_y + i * (u.text_height_px + 1), u.colors.orange)
     end
 end
 
