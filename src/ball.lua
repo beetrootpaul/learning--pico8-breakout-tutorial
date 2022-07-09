@@ -28,12 +28,13 @@ function ball:update()
     local next_y = y + dy
 
     if next_y + r > u.screen_size_px - 1 then
+        lives:lose_one()
+        sfx(u.sfxs.live_lost)
+        -- TODO Should state management happen here, inside ball's code?
         if lives:is_any_left() then
-            lives:lose_one()
             -- TODO here we refer to ball and paddle explicitly, and …
             ball:init()
             paddle:init()
-            sfx(u.sfxs.live_lost)
         else
             -- TODO … and here we have them hidden inside game state
             game_state:enter_state_over()
