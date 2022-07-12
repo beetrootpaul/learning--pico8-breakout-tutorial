@@ -26,8 +26,9 @@ end
 function ball:update()
     local next_x = x + dx
     local next_y = y + dy
+    local lost
 
-    next_x, next_y = self:_handle_collision_with_game_area_edges(next_x, next_y)
+    next_x, next_y, lost = self:_handle_collision_with_game_area_edges(next_x, next_y)
     next_x, next_y = self:_handle_collision_with_paddle(next_x, next_y)
     for brick in all(bricks.list) do
         if brick.visible then
@@ -37,6 +38,8 @@ function ball:update()
 
     x = next_x
     y = next_y
+
+    return lost
 end
 
 function ball:draw()
@@ -48,6 +51,7 @@ end
 -- -- -- -- -- -- -- --
 
 function ball:_handle_collision_with_game_area_edges(next_x, next_y)
+    local lost = false
     if next_y + r > screen_game_area.h - 1 then
         lives:lose_one()
         sfx(u.sfxs.live_lost)
@@ -57,8 +61,7 @@ function ball:_handle_collision_with_game_area_edges(next_x, next_y)
             ball:init()
             paddle:init()
         else
-            -- TODO … and here we have them hidden inside game state
-            game_state:enter_state_over()
+            lost = true
         end
     elseif next_x - r < 0 or next_x + r > u.screen_edge_length - 1 then
         dx = -dx
@@ -69,7 +72,7 @@ function ball:_handle_collision_with_game_area_edges(next_x, next_y)
         next_y = mid(0, next_y, screen_game_area.h - 1)
         sfx(u.sfxs.ball_wall_bounce)
     end
-    return next_x, next_y
+    return next_x, next_y, lost
 end
 
 function ball:_handle_collision_with_paddle(next_x, next_y)

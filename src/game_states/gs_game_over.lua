@@ -1,20 +1,22 @@
-game_state_over = {}
-
--- -- -- -- -- -- --
--- public methods --
--- -- -- -- -- -- --
-
-function game_state_over:init()
-end
-
-function game_state_over:update()
-    if btnp(u.buttons.x) then
-        game_state:enter_state_game()
+new_gs_game_over = setmetatable({ }, {
+    __call = function(self)
+        return setmetatable({}, { __index = self })
     end
+})
+
+function new_gs_game_over:init()
 end
 
-function game_state_over:draw()
-    cls(u.colors.dark_blue)
+function new_gs_game_over:update_and_get_next_state()
+    if btnp(u.buttons.x) then
+        return new_gs_start_screen()
+    end
+    return self
+end
+
+function new_gs_game_over:draw()
+    cls(u.colors.black)
+
     paddle:draw()
     ball:draw()
     status_bar:draw()

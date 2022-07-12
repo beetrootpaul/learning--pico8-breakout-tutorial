@@ -1,19 +1,20 @@
-game_state_start = {}
-
--- -- -- -- -- -- --
--- public methods --
--- -- -- -- -- -- --
-
-function game_state_start:init()
-end
-
-function game_state_start:update()
-    if btnp(u.buttons.x) then
-        game_state:enter_state_game()
+new_gs_start_screen = setmetatable({ }, {
+    __call = function(self)
+        return setmetatable({}, { __index = self })
     end
+})
+
+function new_gs_start_screen:init()
 end
 
-function game_state_start:draw()
+function new_gs_start_screen:update_and_get_next_state()
+    if btnp(u.buttons.x) then
+        return new_gs_in_game()
+    end
+    return self
+end
+
+function new_gs_start_screen:draw()
     cls(u.colors.dark_blue)
 
     local text_gap = 6

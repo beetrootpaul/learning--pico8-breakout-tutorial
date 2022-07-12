@@ -1,16 +1,26 @@
+local current_game_state
+
 function _init()
-    game_state:init()
+    current_game_state = new_gs_start_screen()
+    current_game_state:init()
 end
 
 function _update60()
     d:update()
-    game_state:update()
+
+    local next_state = current_game_state:update_and_get_next_state()
+    if next_state ~= current_game_state then
+        next_state:init()
+    end
+    current_game_state = next_state
 end
 
 function _draw()
-    game_state:draw()
+    current_game_state:draw()
     d:draw()
 end
+
+-- TODO FIX live lose
 
 -- TODO refactor: no more global access everywhere, rather references passed from the main place
 -- TODO refactor: game logic update not in ball, but outside

@@ -4,13 +4,13 @@ __lua__
 -- lazy dev's breakout tutorial
 -- beetroot paul's take
 
---#include src/utils.lua
 #include src/utils.lua
 #include src/debug.lua
-#include src/game_state_start.lua
-#include src/game_state_game.lua
-#include src/game_state_over.lua
-#include src/game_state.lua
+
+#include src/game_states/gs_start_screen.lua
+#include src/game_states/gs_in_game.lua
+#include src/game_states/gs_game_over.lua
+
 #include src/status_bar.lua
 #include src/screen_game_area.lua
 #include src/lives.lua
@@ -19,6 +19,8 @@ __lua__
 #include src/bricks.lua
 #include src/ball.lua
 #include src/paddle.lua
+#include src/main.lua
+
 #include src/main.lua
 
 --[[
