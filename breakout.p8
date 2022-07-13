@@ -12,14 +12,17 @@ __lua__
 #include src/game_states/gs_game_over.lua
 
 #include src/status_bar.lua
-#include src/screen_game_area.lua
+#include src/game_area.lua
+
 #include src/lives.lua
 #include src/score.lua
-#include src/collisions.lua
+
 #include src/bricks.lua
-#include src/ball.lua
+#include src/brick.lua
 #include src/paddle.lua
-#include src/main.lua
+#include src/ball.lua
+
+#include src/collisions.lua
 
 #include src/main.lua
 

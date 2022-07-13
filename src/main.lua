@@ -2,16 +2,12 @@ local current_game_state
 
 function _init()
     current_game_state = new_gs_start_screen()
-    current_game_state:init()
 end
 
 function _update60()
     d:update()
 
     local next_state = current_game_state:update_and_get_next_state()
-    if next_state ~= current_game_state then
-        next_state:init()
-    end
     current_game_state = next_state
 end
 
@@ -19,11 +15,6 @@ function _draw()
     current_game_state:draw()
     d:draw()
 end
-
--- TODO FIX live lose
-
--- TODO refactor: no more global access everywhere, rather references passed from the main place
--- TODO refactor: game logic update not in ball, but outside
 
 -- TODO enumerated ball movement angles: use it for bounces and for sticky paddle and for multi-ball
 
@@ -87,8 +78,6 @@ end
 -- TODO G: glued (sticky) paddle (centered ball or on hit position? what then with ball too on the side so it overlap with a arena border? make sure other power ups continue on falling down, games doesn't pause. What if I catch another power-up while glued ball? Should it release in which direction? Also maybe no timer, but just works once?)
 -- TODO S: super ball: continues through all bricks (except indestructible), continuing combo chain. Different ball color (or name it W wrecking ball?)
 -- TODO M: multi ball: 2 more balls (or just 1?) at other available similar angles. What with combo counter? Losing 1 ball =/= live lost. OK to multi x multi x multi? What with glued paddle? Which one to multi on 2nd pickup, original or random of 2?
-
--- TODO refactor to not access paddle etc. globally, but construct them in one place and pass down as references
 
 -- TODO screenshake: on what action?
 -- TODO screenshake: rectfill instead of cls to move game arena as well

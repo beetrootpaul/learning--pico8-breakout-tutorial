@@ -1,18 +1,12 @@
-score = {
-    -- -- -- -- -- -- -- --
-    -- public properties --
-    -- -- -- -- -- -- -- --
-    points = 0,
-}
+new_score = setmetatable({}, {
+    __call = function(self)
+        local score = {
+            points = 0,
+        }
+        return setmetatable(score, { __index = self })
+    end
+})
 
--- -- -- -- -- -- --
--- public methods --
--- -- -- -- -- -- --
-
-function score:init()
-    self.points = 0
-end
-
-function score:add_points(amount)
+function new_score:add_points(amount)
     self.points = self.points + amount
 end

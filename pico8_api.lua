@@ -25,6 +25,7 @@ end
 function add(tbl, val, index)
 end
 
+--- DISCOURAGED BECAUSE OF BAD PERFORMANCE, USE PAIRS INSTEAD.
 --- Used in FOR loops to iterate over all items in a table (that have a 1-based integer index), in the order they were added.
 --- @param tbl table
 function all(tbl)
@@ -80,6 +81,20 @@ end
 --- @param r number
 --- @param col number color, optional
 function circfill(x, y, r, col)
+end
+
+--- Sets the screen's clipping region in pixels.
+---
+--- CLIP() to reset.
+---
+--- When clip_previous is true, clip the new clipping region by the old one.
+---
+--- @param x number optional in set with y, w, h
+--- @param y number optional in set with x, w, h
+--- @param w number optional in set with x, y, h
+--- @param h number optional in set with x, y, w
+--- @param clip_previous boolean, optional
+function clip(x, y, w, h, clip_previous)
 end
 
 --- Clear the screen and reset the clipping rectangle.

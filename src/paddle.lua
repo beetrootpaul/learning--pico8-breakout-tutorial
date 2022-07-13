@@ -1,49 +1,38 @@
-paddle = {
-    -- -- -- -- -- -- -- --
-    -- public properties --
-    -- -- -- -- -- -- -- --
-    w = 24,
-    h = 4,
-    x = nil,
-    y = nil,
-}
+new_paddle = setmetatable({}, {
+    __call = function(self, params)
+        local paddle = {
+            w = 24,
+            h = 4,
+            _max_dx = 3,
+            _dx = 0,
+            _game_area = params.game_area,
+        }
+        local bottom_gap = 12
+        paddle.x = paddle._game_area.w / 2 - paddle.w / 2
+        paddle.y = paddle._game_area.h - bottom_gap - paddle.h
+        return setmetatable(paddle, { __index = self })
+    end
+})
 
--- -- -- -- -- -- -- --
--- private variables --
--- -- -- -- -- -- -- --
-
-local bottom_gap = 12
-local dx = 0
-local max_dx = 3
-local color = u.colors.light_grey
-
--- -- -- -- -- -- --
--- public methods --
--- -- -- -- -- -- --
-
-function paddle:init()
-    dx = 0
-    self.x = u.screen_edge_length / 2 - self.w / 2
-    self.y = screen_game_area.h - bottom_gap - self.h
+function new_paddle:move_left()
+    self._dx = -self._max_dx
 end
 
-function paddle:update()
-    dx = 0.5 * dx
-    if btn(u.buttons.l) then
-        dx = -max_dx
-    end
-    if btn(u.buttons.r) then
-        dx = max_dx
-    end
-    d:add_message("p.dx=" .. dx)
-    self.x = self.x + dx
-    self.x = mid(0, self.x, u.screen_edge_length - 1 - paddle.w)
+function new_paddle:move_right()
+    self._dx = self._max_dx
 end
 
-function paddle:draw()
+function new_paddle:update()
+    self._dx = 0.5 * self._dx
+    d:add_message("p.dx=" .. self._dx)
+    self.x = self.x + self._dx
+    self.x = mid(0, self.x, self._game_area.w - 1 - self.w)
+end
+
+function new_paddle:draw()
     rectfill(
-        self.x, screen_game_area.offset_y + self.y,
-        self.x + self.w, screen_game_area.offset_y + self.y + self.h,
-        color
+        self._game_area.x + self.x, self._game_area.y + self.y,
+        self._game_area.x + self.x + self.w, self._game_area.y + self.y + self.h,
+        u.colors.light_grey
     )
 end
