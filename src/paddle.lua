@@ -1,13 +1,13 @@
 new_paddle = setmetatable({}, {
     __call = function(self, params)
         local paddle = {
-            w = 24,
-            h = 4,
+            w = u.sprites.paddle.w,
+            h = u.sprites.paddle.h,
             _max_dx = 3,
             _dx = 0,
             _game_area = params.game_area,
         }
-        local bottom_gap = 12
+        local bottom_gap = 4
         paddle.x = paddle._game_area.w / 2 - paddle.w / 2
         paddle.y = paddle._game_area.h - bottom_gap - paddle.h
         return setmetatable(paddle, { __index = self })
@@ -30,9 +30,24 @@ function new_paddle:update()
 end
 
 function new_paddle:draw()
-    rectfill(
-        self._game_area.x + self.x, self._game_area.y + self.y,
-        self._game_area.x + self.x + self.w, self._game_area.y + self.y + self.h,
-        u.colors.light_grey
-    )
+    spr(u.sprites.paddle.tile_left,
+        self._game_area.x + self.x,
+        self._game_area.y + self.y,
+        1,
+        self.h / u.tile_edge_length)
+    spr(u.sprites.paddle.tile_middle,
+        self._game_area.x + self.x + u.tile_edge_length,
+        self._game_area.y + self.y,
+        1,
+        self.h / u.tile_edge_length)
+    spr(u.sprites.paddle.tile_middle,
+        self._game_area.x + self.x + 2 * u.tile_edge_length,
+        self._game_area.y + self.y,
+        1,
+        self.h / u.tile_edge_length)
+    spr(u.sprites.paddle.tile_right,
+        self._game_area.x + self.x + 3 * u.tile_edge_length,
+        self._game_area.y + self.y,
+        1,
+        self.h / u.tile_edge_length)
 end

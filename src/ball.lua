@@ -3,7 +3,7 @@ new_ball = setmetatable({}, {
         local ball = {
             _x = 40,
             _y = 60,
-            _r = 2,
+            _r = u.sprites.ball.r,
             _dx = 1,
             _dy = 2,
             _has_collided_in_prev_frame = false,
@@ -37,10 +37,11 @@ function new_ball:update()
 end
 
 function new_ball:draw()
-    circfill(
-        self._game_area.x + self._x, self._game_area.y + self._y,
-        self._r,
-        u.colors.orange)
+    spr(u.sprites.ball.tile,
+        self._game_area.x + self._x - self._r,
+        self._game_area.y + self._y - self._r,
+        (1 + 2 * self._r) / u.tile_edge_length,
+        (1 + 2 * self._r) / u.tile_edge_length)
 end
 
 function new_ball:_handle_collision_with_game_area_edges(next_x, next_y)

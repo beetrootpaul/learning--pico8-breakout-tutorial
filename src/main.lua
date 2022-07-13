@@ -40,8 +40,6 @@ end
 -- TODO start direction indicator
 -- TODO start direction indicator polished juicy
 
--- TODO bricks as nice sprites
-
 -- TODO multiple levels
 -- TODO continue score on levels
 -- TODO level over screen similar to game over, but good job and X to continue
@@ -73,7 +71,7 @@ end
 -- TODO one power-up overwrites another while 1st time has not passed yet?
 -- TODO counter towards end of the current power-up
 -- TODO H: +1 heart (what max cap to have? OK to generate L if max hearts are there?)
--- TODO E: extended/longer paddle (make sure no lock when extended on screen border. Extend one direction instead. Maybe do not randomly pick next E while already in E) Consider sprite for paddle so it will be easier to show extended
+-- TODO E: extended/longer paddle (make sure no lock when extended on screen border. Extend one direction instead. Maybe do not randomly pick next E while already in E)
 -- TODO R: reduced/shorter paddle (make its color look like something bad)
 -- TODO G: glued (sticky) paddle (centered ball or on hit position? what then with ball too on the side so it overlap with a arena border? make sure other power ups continue on falling down, games doesn't pause. What if I catch another power-up while glued ball? Should it release in which direction? Also maybe no timer, but just works once?)
 -- TODO S: super ball: continues through all bricks (except indestructible), continuing combo chain. Different ball color (or name it W wrecking ball?)

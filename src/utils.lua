@@ -1,4 +1,5 @@
 local text_height_px = 5
+local tile_edge_length = 8
 
 local utils = {
     buttons = {
@@ -38,7 +39,26 @@ local utils = {
         ball_brick_bounce = 1,
         live_lost = 2,
     },
+    sprites = {
+        ball = {
+            r = 2,
+            tile = 36,
+        },
+        bricks = {
+            w = 8,
+            h = 4,
+            tile_regular = 1,
+        },
+        paddle = {
+            w = 32,
+            h = 6,
+            tile_left = 32,
+            tile_middle = 33,
+            tile_right = 34,
+        }
+    },
     text_height_px = text_height_px,
+    tile_edge_length = tile_edge_length,
 }
 
 u = utils

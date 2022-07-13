@@ -5,16 +5,18 @@ new_bricks = setmetatable({}, {
             _game_area = params.game_area,
         }
 
-        local brick_w = 10
-        local brick_h = 6
+        local brick_w = u.sprites.bricks.w
+        local brick_h = u.sprites.bricks.h
         local brick_gap = 1
-        local rows = 5
-        local columns = 9
+        local rows = 7
+        local columns = 13
         local initial_x = bricks._game_area.w / 2 - (columns * (brick_w + brick_gap) - brick_gap) / 2
         local initial_y = 7
         for row = 0, rows - 1 do
             for column = 0, columns - 1 do
                 add(bricks._list, new_brick({
+                    offset_x = bricks._game_area.x,
+                    offset_y = bricks._game_area.y,
                     x = initial_x + column * (brick_w + brick_gap),
                     y = initial_y + row * (brick_h + brick_gap),
                     w = brick_w,
@@ -30,12 +32,7 @@ new_bricks = setmetatable({}, {
 function new_bricks:draw()
     for _, brick in pairs(self._list) do
         if brick:is_visible() then
-            rectfill(
-                self._game_area.x + brick.x,
-                self._game_area.y + brick.y,
-                self._game_area.x + brick.x + brick.w - 1,
-                self._game_area.y + brick.y + brick.h - 1,
-                u.colors.pink)
+            brick:draw()
         end
     end
 end
