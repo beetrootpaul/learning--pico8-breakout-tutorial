@@ -1,22 +1,12 @@
 new_bricks = setmetatable({}, {
     __call = function(self, params)
         local bricks = {
-            _list = {},
+            _list = level_deserializer:deserialize(params.serialized_level, params.game_area),
             _game_area = params.game_area,
         }
-
-        local serialized_level = u.serialized_levels[1]
-        bricks._list = level_deserializer:deserialize(serialized_level, bricks._game_area)
-
         return setmetatable(bricks, { __index = self })
     end
 })
-
-function new_bricks:draw()
-    self:for_each_visible_brick(function(brick)
-        brick:draw()
-    end)
-end
 
 function new_bricks:for_each_visible_brick(callback)
     for _, brick in pairs(self._list) do
@@ -24,4 +14,18 @@ function new_bricks:for_each_visible_brick(callback)
             callback(brick)
         end
     end
+end
+
+function new_bricks:draw()
+    self:for_each_visible_brick(function(brick)
+        brick:draw()
+    end)
+end
+
+function new_bricks:is_any_left()
+    local is_any_visible = false
+    self:for_each_visible_brick(function(brick)
+        is_any_visible = true
+    end)
+    return is_any_visible
 end

@@ -10,6 +10,7 @@ __lua__
 #include src/game_states/gs_start_screen.lua
 #include src/game_states/gs_in_game.lua
 #include src/game_states/gs_game_over.lua
+#include src/game_states/gs_game_complete.lua
 
 #include src/status_bar.lua
 #include src/game_area.lua

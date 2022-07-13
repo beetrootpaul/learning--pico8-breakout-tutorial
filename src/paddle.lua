@@ -3,7 +3,7 @@ new_paddle = setmetatable({}, {
         local paddle = {
             w = u.sprites.paddle.w,
             h = u.sprites.paddle.h,
-            _max_dx = 3,
+            _max_dx = 4,
             _dx = 0,
             _game_area = params.game_area,
         }
