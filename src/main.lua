@@ -18,10 +18,8 @@ end
 
 -- TODO enumerated ball movement angles: use it for bounces and for sticky paddle and for multi-ball
 
--- TODO debug overrides to simulate powertup take, etc, to override chances of powerup, etc
+-- TODO debug overrides to simulate power-up take, etc, to override chances of powerup, etc
 
--- TODO deserialized brick patterns (i.e. "bxbxb/xbxbx/bxbxb")
--- TODO 2 chars per brick, so it will look more like level and allow for mor info stored like hardened 1s vs 2nd
 -- TODO make pattern lines start left (instead of centered independently), because later I will need to easily find surrounding bricks by indices
 
 -- TODO ball vs paddle bounce angle affected by paddle dx

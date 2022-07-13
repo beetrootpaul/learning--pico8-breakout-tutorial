@@ -33,6 +33,25 @@ local utils = {
         return print(text, 0, y_to_print_outside_screen)
     end,
     screen_edge_length = 128,
+    serialized_levels = {
+        [[
+
+
+            -          -
+        ]],
+        [[
+            #-----------#
+            ---#------#--
+            ------#------
+            ---#------#--
+            #-----------#
+        ]],
+        [[
+            ###
+            #-#
+            ###
+        ]],
+    },
     sfxs = {
         ball_wall_bounce = 0,
         ball_paddle_bounce = 0,
@@ -61,6 +80,16 @@ local utils = {
     },
     text_height_px = text_height_px,
     tile_edge_length = tile_edge_length,
+    trim = function(text)
+        local result = text
+        while sub(result, 1, 1) == ' ' do
+            result = sub(result, 2)
+        end
+        while sub(result, #result, #result) == ' ' do
+            result = sub(result, 0, #result - 1)
+        end
+        return result
+    end
 }
 
 u = utils

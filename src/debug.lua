@@ -1,5 +1,6 @@
 local debug = {
     _enabled = false,
+    _persistent_messages = {},
     _messages = {},
     _lines = {},
     _circle_markers = {},
@@ -32,9 +33,16 @@ function debug:draw()
     for _, cmark in pairs(self._circle_markers) do
         circ(cmark.x, cmark.y, cmark.r, u.colors.white)
     end
-    for i, msg in pairs(self._messages) do
+    for i, msg in pairs(self._persistent_messages) do
         print(msg, messages_offset_x, messages_offset_y + i * (u.text_height_px + 1), u.colors.white)
     end
+    for i, msg in pairs(self._messages) do
+        print(msg, messages_offset_x, messages_offset_y + (#self._persistent_messages + i) * (u.text_height_px + 1), u.colors.white)
+    end
+end
+
+function debug:add_persistent_message(message)
+    add(self._persistent_messages, message)
 end
 
 function debug:add_message(message)

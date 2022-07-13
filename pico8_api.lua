@@ -272,6 +272,18 @@ end
 function sfx(n, channel, offset, length)
 end
 
+--- Split a string into a table of elements delimited by the given separator (defaults to ",").
+--- When separator is a number n, the string is split into n-character groups.
+--- When convert_numbers is true, numerical tokens are stored as numbers (defaults to true).
+--- Empty elements are stored as empty strings.
+---
+--- @param str string
+--- @param separator string, optional, default: ","
+--- @param convert_numbers boolean, optional, default: true
+--- @return table
+function split(str, separator, convert_numbers)
+end
+
 --- Draw sprite N (0..255) at position X,Y
 --- @param n number
 --- @param x number
@@ -281,6 +293,18 @@ end
 --- @param flip_x boolean
 --- @param flip_y boolean
 function spr(n, x, y, w, h, flip_x, flip_y)
+end
+
+
+--- Grab a substring from string str, from pos0 up to and including pos1.
+--- When POS1 is not specified, the remainder of the string is returned.
+--- When POS1 is specified, but not a number, a single character at POS0 is returned.
+---
+--- @param str string
+--- @param pos0 number
+--- @param pos1 number optional
+--- @return table
+function sub(str, pos0, pos1)
 end
 
 --- Convert VAL to a string.
