@@ -26,10 +26,8 @@ function new_ball:update()
 
     next_x, next_y = self:_handle_collision_with_game_area_edges(next_x, next_y)
     next_x, next_y = self:_handle_collision_with_paddle(next_x, next_y)
-    self._bricks:for_each_brick(function(brick)
-        if brick:is_visible() then
-            next_x, next_y = self:_handle_collision_with_brick(next_x, next_y, brick)
-        end
+    self._bricks:for_each_visible_brick(function(brick)
+        next_x, next_y = self:_handle_collision_with_brick(next_x, next_y, brick)
     end)
 
     self._x = next_x

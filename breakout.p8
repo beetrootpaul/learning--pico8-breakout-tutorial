@@ -17,8 +17,10 @@ __lua__
 #include src/lives.lua
 #include src/score.lua
 
-#include src/bricks.lua
-#include src/brick.lua
+#include src/bricks/bricks.lua
+#include src/bricks/brick.lua
+#include src/bricks/brick_regular.lua
+#include src/bricks/brick_hardened.lua
 #include src/paddle.lua
 #include src/ball.lua
 

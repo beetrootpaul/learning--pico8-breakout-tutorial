@@ -48,6 +48,8 @@ local utils = {
             w = 8,
             h = 4,
             tile_regular = 1,
+            tile_hardened_initial = 2,
+            tile_hardened_weakened = 3,
         },
         paddle = {
             w = 32,

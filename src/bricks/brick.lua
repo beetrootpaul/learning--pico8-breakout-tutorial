@@ -11,24 +11,18 @@ new_brick = setmetatable({}, {
             -- with its x,y,w,h as a rectangle to check.
             w = params.w,
             h = params.h,
-            _visible = true,
+            visible = true,
         }
         return setmetatable(brick, { __index = self })
     end
 })
 
 function new_brick:draw()
-    spr(u.sprites.bricks.tile_regular,
-        self._offset_x + self.x,
-        self._offset_y + self.y,
-        self.w / u.tile_edge_length,
-        self.h / u.tile_edge_length)
-end
-
-function new_brick:is_visible()
-    return self._visible
+    -- Do nothing here, because the way this method works depend on a brick type.
+    assert(false)
 end
 
 function new_brick:hit_by_ball()
-    self._visible = false
+    -- Do nothing here, because the way this method works depend on a brick type.
+    assert(false)
 end

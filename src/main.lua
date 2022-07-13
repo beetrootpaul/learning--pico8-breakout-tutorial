@@ -45,12 +45,11 @@ end
 -- TODO level over screen similar to game over, but good job and X to continue
 -- TODO custom menu item to skip level?
 
--- TODO regular bricks, but in various colors
-
--- TODO hardened brick (hit twice, two types to cover them instead of single type and a counter)
 -- TODO hardened brick 1st hit SFX
 -- TODO explosive brick do not count more than 2nd hit towards combo
 -- TODO explosive brick do not break combo chain on 1st hit
+
+-- TODO 1 hit SFX even if 2+ bricks hit at the same time
 
 -- TODO explosive brick
 -- TODO explosive brick SFX
