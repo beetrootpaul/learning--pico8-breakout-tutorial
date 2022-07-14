@@ -1,23 +1,18 @@
-lives = {
-    -- -- -- -- -- -- -- --
-    -- public properties --
-    -- -- -- -- -- -- -- --
-    max = 3,
-    left = 0,
-}
+new_lives = setmetatable({}, {
+    __call = function(self)
+        local lives = {
+            max = 3,
+        }
+        lives.left = lives.max
+        return setmetatable(lives, { __index = self })
+    end
+})
 
--- -- -- -- -- -- --
--- public methods --
--- -- -- -- -- -- --
-
-function lives:init()
-    self.left = self.max
-end
-
-function lives:lose_one()
-    self.left = self.left - 1
-end
-
-function lives:is_any_left()
+function new_lives:is_any_left()
     return self.left > 0
+end
+
+function new_lives:lose_one()
+    sfx(u.sfxs.live_lost)
+    self.left = self.left - 1
 end

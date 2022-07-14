@@ -1,49 +1,61 @@
-paddle = {
-    -- -- -- -- -- -- -- --
-    -- public properties --
-    -- -- -- -- -- -- -- --
-    w = 24,
-    h = 4,
-    x = nil,
-    y = nil,
-}
+new_paddle = setmetatable({}, {
+    __call = function(self, params)
+        local paddle = {
+            w = u.sprites.paddle.w,
+            h = u.sprites.paddle.h,
+            _max_dx = 2,
+            _dx = 0,
+            _game_area = params.game_area,
+        }
+        local bottom_gap = 4
+        paddle.x = paddle._game_area.w / 2 - paddle.w / 2
+        paddle.y = paddle._game_area.h - bottom_gap - paddle.h
+        return setmetatable(paddle, { __index = self })
+    end
+})
 
--- -- -- -- -- -- -- --
--- private variables --
--- -- -- -- -- -- -- --
-
-local bottom_gap = 12
-local dx = 0
-local max_dx = 3
-local color = u.colors.light_grey
-
--- -- -- -- -- -- --
--- public methods --
--- -- -- -- -- -- --
-
-function paddle:init()
-    dx = 0
-    self.x = u.screen_edge_length / 2 - self.w / 2
-    self.y = screen_game_area.h - bottom_gap - self.h
+function new_paddle:move_left()
+    self._dx = -self._max_dx
 end
 
-function paddle:update()
-    dx = 0.5 * dx
-    if btn(u.buttons.l) then
-        dx = -max_dx
-    end
-    if btn(u.buttons.r) then
-        dx = max_dx
-    end
-    d:add_message("p.dx=" .. dx)
-    self.x = self.x + dx
-    self.x = mid(0, self.x, u.screen_edge_length - 1 - paddle.w)
+function new_paddle:move_right()
+    self._dx = self._max_dx
 end
 
-function paddle:draw()
-    rectfill(
-        self.x, screen_game_area.offset_y + self.y,
-        self.x + self.w, screen_game_area.offset_y + self.y + self.h,
-        color
-    )
+function new_paddle:moves_fast_left()
+    return self._dx < -self._max_dx * 0.4
+end
+
+function new_paddle:moves_fast_right()
+    return self._dx > self._max_dx * 0.4
+end
+
+function new_paddle:update()
+    --d:add_message("p.dx=" .. self._dx)
+    self.x = self.x + self._dx
+    self.x = mid(0, self.x, self._game_area.w - 1 - self.w)
+    self._dx = 0.6 * self._dx
+end
+
+function new_paddle:draw()
+    spr(u.sprites.paddle.tile_left,
+        self._game_area.x + self.x,
+        self._game_area.y + self.y,
+        1,
+        self.h / u.tile_edge_length)
+    spr(u.sprites.paddle.tile_middle,
+        self._game_area.x + self.x + u.tile_edge_length,
+        self._game_area.y + self.y,
+        1,
+        self.h / u.tile_edge_length)
+    spr(u.sprites.paddle.tile_middle,
+        self._game_area.x + self.x + 2 * u.tile_edge_length,
+        self._game_area.y + self.y,
+        1,
+        self.h / u.tile_edge_length)
+    spr(u.sprites.paddle.tile_right,
+        self._game_area.x + self.x + 3 * u.tile_edge_length,
+        self._game_area.y + self.y,
+        1,
+        self.h / u.tile_edge_length)
 end
