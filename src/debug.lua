@@ -35,9 +35,11 @@ function debug:draw()
     end
     for i, msg in pairs(self._persistent_messages) do
         print(msg, messages_offset_x, messages_offset_y + i * (u.text_height_px + 1), u.colors.white)
+        printh(msg)
     end
     for i, msg in pairs(self._messages) do
         print(msg, messages_offset_x, messages_offset_y + (#self._persistent_messages + i) * (u.text_height_px + 1), u.colors.white)
+        printh(msg)
     end
 end
 

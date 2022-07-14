@@ -233,6 +233,23 @@ end
 function print(str, x, y, col)
 end
 
+--- Print a string to the host operating system's console for debugging.
+---
+--- If filename is set, append the string to a file on the host operating system (in the current directory by default -- use FOLDER to view).
+---
+--- Setting OVERWRITE to true causes that file to be overwritten rather than appended.
+---
+--- Setting SAVE_TO_DESKTOP to true saves to the desktop instead of the current path.
+---
+--- Use a filename of "@clip" to write to the host's clipboard.
+---
+--- @param str string text to print
+--- @param filename string optional
+--- @param overwrite boolean optional
+--- @param save_to_desktop boolean optional
+function printh(str, filename, overwrite, save_to_desktop)
+end
+
 --- Draw a rectangle with corners at (X0, Y0), (X1, Y1).
 --- @param x0 number top-left corner
 --- @param y0 number top-left corner
