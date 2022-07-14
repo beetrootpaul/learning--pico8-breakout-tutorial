@@ -93,17 +93,14 @@ end
 
 function new_ball:_handle_collision_with_game_area_edges(next_x, next_y)
     if next_x - self._r < 0 then
-        d:add_message("ball x area --> bounce H --> right")
         self._angle.right = true
         next_x = mid(0, next_x, self._game_area.w - 1)
         sfx(u.sfxs.ball_wall_bounce)
     elseif next_x + self._r > self._game_area.w - 1 then
-        d:add_message("ball x area --> bounce H --> left")
         self._angle.right = false
         next_x = mid(0, next_x, self._game_area.w - 1)
         sfx(u.sfxs.ball_wall_bounce)
     elseif next_y - self._r < 0 then
-        d:add_message("ball x area --> bounce V --> down")
         self._angle.up = false
         next_y = mid(0, next_y, self._game_area.h - 1)
         sfx(u.sfxs.ball_wall_bounce)
@@ -137,9 +134,23 @@ function new_ball:_handle_collision_with_paddle(next_x, next_y)
             else
                 d:add_message("ball x paddle --> bounce H --> right")
                 self._angle.right = true
+                if self._paddle:moves_fast_right() then
+                    d:add_message("==> fast right ==>")
+                    self._angle.low = true
+                elseif self._paddle:moves_fast_left() then
+                    d:add_message("<== fast left <==")
+                    self._angle.low = false
+                end
                 next_x = max(self._paddle.x + self._paddle.w + 1, next_x) + self:_dx()
             end
         else
+            if self._paddle:moves_fast_right() then
+                d:add_message("==> fast right ==>")
+                self._angle.low = self._angle.right
+            elseif self._paddle:moves_fast_left() then
+                d:add_message("<== fast left <==")
+                self._angle.low = not self._angle.right
+            end
             if next_y < self._paddle.y + self._paddle.h / 2 then
                 d:add_message("ball x paddle --> bounce V --> up")
                 self._angle.up = true

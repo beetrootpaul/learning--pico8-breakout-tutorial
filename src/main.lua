@@ -16,25 +16,13 @@ function _draw()
     d:draw()
 end
 
--- TODO enumerated ball movement angles: use it for bounces and for sticky paddle and for multi-ball
-
 -- TODO debug overrides to simulate power-up take, etc, to override chances of powerup, etc
-
--- TODO make pattern lines start left (instead of centered independently), because later I will need to easily find surrounding bricks by indices
-
--- TODO ball vs paddle bounce angle affected by paddle dx
--- TODO bounce angles only aligned with integer values (i.e. 2x1, 1x2, 2x1)
--- TODO honor angle ball approaches the paddle, modify in relation to that
--- TODO debug constant visualisation of bounce direction?
 
 -- TODO combo chain with more and more points
 -- TODO sfx higher and higher (with upper limit) during combo chain
 -- TODO combo in status bar
 -- TODO how to reset combo? Think about it in terms of multi-ball. Paddle and wall resets?
 
--- TODO multiple levels
--- TODO continue score on levels
--- TODO level over screen similar to game over, but good job and X to continue
 -- TODO custom menu item to skip level?
 
 -- TODO hardened brick 1st hit SFX
@@ -89,10 +77,6 @@ end
 -- TODO animate bricks falling down to form a level
 
 -- TODO any new SFXs and effects in them?
-
--- TODO collision on corner deflects both x and y
-
--- TODO: all levels clear screen
 
 -- TODO: music: song for start screen
 -- TODO: music: song for all levels clear screen

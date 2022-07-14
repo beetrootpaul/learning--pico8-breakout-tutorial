@@ -3,7 +3,7 @@ new_paddle = setmetatable({}, {
         local paddle = {
             w = u.sprites.paddle.w,
             h = u.sprites.paddle.h,
-            _max_dx = 4,
+            _max_dx = 2,
             _dx = 0,
             _game_area = params.game_area,
         }
@@ -22,11 +22,19 @@ function new_paddle:move_right()
     self._dx = self._max_dx
 end
 
+function new_paddle:moves_fast_left()
+    return self._dx < -self._max_dx * 0.4
+end
+
+function new_paddle:moves_fast_right()
+    return self._dx > self._max_dx * 0.4
+end
+
 function new_paddle:update()
-    self._dx = 0.5 * self._dx
     --d:add_message("p.dx=" .. self._dx)
     self.x = self.x + self._dx
     self.x = mid(0, self.x, self._game_area.w - 1 - self.w)
+    self._dx = 0.6 * self._dx
 end
 
 function new_paddle:draw()
