@@ -5,8 +5,11 @@ new_ball = setmetatable({}, {
             _x = params.paddle.x + params.paddle.w / 2,
             _y = params.paddle.y - u.sprites.ball.r - 1,
             _r = u.sprites.ball.r,
-            _dx = 0,
-            _dy = 0,
+            _angle = {
+                low = false,
+                right = true,
+                up = true,
+            },
             _has_collided_in_prev_frame = false,
             _game_area = params.game_area,
             _bricks = params.bricks,
@@ -23,8 +26,11 @@ function new_ball:update()
     if self.glued_to_paddle then
         self._x = self._paddle.x + self._paddle.w / 2
         self._y = self._paddle.y - self._r - 1
-        self._dx = 1
-        self._dy = -2
+        self._angle = {
+            low = false,
+            right = true,
+            up = true,
+        }
         return
     end
 
@@ -32,8 +38,8 @@ function new_ball:update()
     --  which shows a ball that already crossed the game area's edge.
     self.is_outside_game_area = self._y + self._r > self._game_area.h - 1
 
-    local next_x = self._x + self._dx
-    local next_y = self._y + self._dy
+    local next_x = self._x + self:_dx()
+    local next_y = self._y + self:_dy()
 
     next_x, next_y = self:_handle_collision_with_game_area_edges(next_x, next_y)
     next_x, next_y = self:_handle_collision_with_paddle(next_x, next_y)
@@ -53,13 +59,52 @@ function new_ball:draw()
         (1 + 2 * self._r) / u.tile_edge_length)
 end
 
+function new_ball:_dx()
+    if self._angle.right then
+        if self._angle.low then
+            return 2
+        else
+            return 1
+        end
+    else
+        if self._angle.low then
+            return -2
+        else
+            return -1
+        end
+    end
+end
+
+function new_ball:_dy()
+    if self._angle.up then
+        if self._angle.low then
+            return -1
+        else
+            return -2
+        end
+    else
+        if self._angle.low then
+            return 1
+        else
+            return 2
+        end
+    end
+end
+
 function new_ball:_handle_collision_with_game_area_edges(next_x, next_y)
-    if next_x - self._r < 0 or next_x + self._r > self._game_area.w - 1 then
-        self._dx = -self._dx
+    if next_x - self._r < 0 then
+        d:add_message("ball x area --> bounce H --> right")
+        self._angle.right = true
+        next_x = mid(0, next_x, self._game_area.w - 1)
+        sfx(u.sfxs.ball_wall_bounce)
+    elseif next_x + self._r > self._game_area.w - 1 then
+        d:add_message("ball x area --> bounce H --> left")
+        self._angle.right = false
         next_x = mid(0, next_x, self._game_area.w - 1)
         sfx(u.sfxs.ball_wall_bounce)
     elseif next_y - self._r < 0 then
-        self._dy = -self._dy
+        d:add_message("ball x area --> bounce V --> down")
+        self._angle.up = false
         next_y = mid(0, next_y, self._game_area.h - 1)
         sfx(u.sfxs.ball_wall_bounce)
     end
@@ -86,19 +131,23 @@ function new_ball:_handle_collision_with_paddle(next_x, next_y)
         end
         if bounce_horizontally then
             if next_x < self._paddle.x + self._paddle.w / 2 then
-                self._dx = -abs(self._dx)
-                next_x = min(next_x, self._paddle.x - 1) + self._dx
+                d:add_message("ball x paddle --> bounce H --> left")
+                self._angle.right = false
+                next_x = min(next_x, self._paddle.x - 1) + self:_dx()
             else
-                self._dx = abs(self._dx)
-                next_x = max(self._paddle.x + self._paddle.w + 1, next_x) + self._dx
+                d:add_message("ball x paddle --> bounce H --> right")
+                self._angle.right = true
+                next_x = max(self._paddle.x + self._paddle.w + 1, next_x) + self:_dx()
             end
         else
             if next_y < self._paddle.y + self._paddle.h / 2 then
-                self._dy = -abs(self._dy)
-                next_y = min(next_y, self._paddle.y - 1) + self._dy
+                d:add_message("ball x paddle --> bounce V --> up")
+                self._angle.up = true
+                next_y = min(next_y, self._paddle.y - 1) + self:_dy()
             else
-                self._dy = abs(self._dy)
-                next_y = max(self._paddle.y + self._paddle.h + 1, next_y) + self._dy
+                d:add_message("ball x paddle --> bounce V --> down")
+                self._angle.up = false
+                next_y = max(self._paddle.y + self._paddle.h + 1, next_y) + self:_dy()
             end
         end
         self._has_collided_in_prev_frame = true
@@ -127,15 +176,19 @@ function new_ball:_handle_collision_with_brick(next_x, next_y, brick)
         brick:hit_by_ball()
         if bounce_horizontally then
             if next_x < brick.x + brick.w / 2 then
-                self._dx = -abs(self._dx)
+                d:add_message("ball x brick --> bounce H --> left")
+                self._angle.right = false
             else
-                self._dx = abs(self._dx)
+                d:add_message("ball x brick --> bounce H --> right")
+                self._angle.right = true
             end
         else
             if next_y < brick.y + brick.h / 2 then
-                self._dy = -abs(self._dy)
+                d:add_message("ball x brick --> bounce V --> up")
+                self._angle.up = true
             else
-                self._dy = abs(self._dy)
+                d:add_message("ball x brick --> bounce V --> down")
+                self._angle.up = false
             end
         end
     end

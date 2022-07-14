@@ -24,7 +24,7 @@ end
 
 function new_paddle:update()
     self._dx = 0.5 * self._dx
-    d:add_message("p.dx=" .. self._dx)
+    --d:add_message("p.dx=" .. self._dx)
     self.x = self.x + self._dx
     self.x = mid(0, self.x, self._game_area.w - 1 - self.w)
 end
