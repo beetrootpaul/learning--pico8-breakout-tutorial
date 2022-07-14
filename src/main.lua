@@ -32,12 +32,6 @@ end
 -- TODO combo in status bar
 -- TODO how to reset combo? Think about it in terms of multi-ball. Paddle and wall resets?
 
--- TODO glued (sticky) paddle on every live
--- TODO start direction taken from paddle movement (movement set permanently or only during movement?)
--- TODO or maybe start direction changing constantly over time, so you have to pick one? or maybe use Z to change?
--- TODO start direction indicator
--- TODO start direction indicator polished juicy
-
 -- TODO multiple levels
 -- TODO continue score on levels
 -- TODO level over screen similar to game over, but good job and X to continue
@@ -96,13 +90,9 @@ end
 
 -- TODO any new SFXs and effects in them?
 
--- TODO logo sprite on start screen
-
 -- TODO collision on corner deflects both x and y
 
 -- TODO: all levels clear screen
-
--- TODO: paddle movement speed trail lines
 
 -- TODO: music: song for start screen
 -- TODO: music: song for all levels clear screen

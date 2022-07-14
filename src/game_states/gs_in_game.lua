@@ -12,6 +12,7 @@ new_gs_in_game = setmetatable({ }, {
         })
         local paddle = new_paddle({ game_area = game_area })
         local ball = new_ball({
+            glued_to_paddle = true,
             game_area = game_area,
             bricks = bricks,
             paddle = paddle,
@@ -51,6 +52,7 @@ function new_gs_in_game:update_and_get_next_state()
             })
             self._paddle = new_paddle({ game_area = self._game_area })
             self._ball = new_ball({
+                glued_to_paddle = true,
                 game_area = self._game_area,
                 bricks = self._bricks,
                 paddle = self._paddle,
@@ -68,12 +70,16 @@ function new_gs_in_game:update_and_get_next_state()
     end
     self._paddle:update()
     self._ball:update()
+    if btnp(u.buttons.x) then
+        self._ball.glued_to_paddle = false
+    end
 
     if self._ball.is_outside_game_area then
         self._lives:lose_one()
         if self._lives:is_any_left() then
             self._paddle = new_paddle({ game_area = self._game_area })
             self._ball = new_ball({
+                glued_to_paddle = true,
                 game_area = self._game_area,
                 bricks = self._bricks,
                 paddle = self._paddle,

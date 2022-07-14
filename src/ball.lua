@@ -1,22 +1,33 @@
 new_ball = setmetatable({}, {
     __call = function(self, params)
         local ball = {
-            _x = 40,
-            _y = 60,
+            glued_to_paddle = params.glued_to_paddle,
+            _x = params.paddle.x + params.paddle.w / 2,
+            _y = params.paddle.y - u.sprites.ball.r - 1,
             _r = u.sprites.ball.r,
-            _dx = 1,
-            _dy = 2,
+            _dx = 0,
+            _dy = 0,
             _has_collided_in_prev_frame = false,
             _game_area = params.game_area,
             _bricks = params.bricks,
             _paddle = params.paddle,
             _score = params.score,
         }
+        ball._x = ball._paddle.x + ball._paddle.w / 2
+        ball._y = ball._paddle.y - ball._r - 1
         return setmetatable(ball, { __index = self })
     end
 })
 
 function new_ball:update()
+    if self.glued_to_paddle then
+        self._x = self._paddle.x + self._paddle.w / 2
+        self._y = self._paddle.y - self._r - 1
+        self._dx = 1
+        self._dy = -2
+        return
+    end
+
     -- Check this before updating x and y. Thanks to it we will end up with game over screen,
     --  which shows a ball that already crossed the game area's edge.
     self.is_outside_game_area = self._y + self._r > self._game_area.h - 1
