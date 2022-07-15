@@ -25,7 +25,6 @@ end
 
 -- TODO custom menu item to skip level?
 
--- TODO hardened brick 1st hit SFX
 -- TODO explosive brick do not count more than 2nd hit towards combo
 -- TODO explosive brick do not break combo chain on 1st hit
 
@@ -37,7 +36,6 @@ end
 -- TODO explosive brick do not count more than 1 towards combo? or do they?
 -- TODO explosive brick count as single hit towards hardened bricks and makes other explosives explode
 
--- TODO indestructible brick (not counted towards level completion)
 -- TODO indestructible brick: do not count towards combo, but also do not lose combo chain
 
 -- TODO power-up type of a brick (randomly chosen type? under random bricks or not?)

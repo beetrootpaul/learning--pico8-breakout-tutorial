@@ -22,4 +22,5 @@ end
 
 function new_brick_regular:hit_by_ball()
     self.visible = false
+    sfx(u.sfxs.ball_hit_brick_regular)
 end

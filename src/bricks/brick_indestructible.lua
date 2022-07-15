@@ -25,4 +25,5 @@ function new_brick_indestructible:draw()
 end
 
 function new_brick_indestructible:hit_by_ball()
+    sfx(u.sfxs.ball_hit_brick_indestructible)
 end

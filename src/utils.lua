@@ -63,8 +63,10 @@ local utils = {
     sfxs = {
         ball_wall_bounce = 0,
         ball_paddle_bounce = 0,
-        ball_brick_bounce = 1,
+        ball_hit_brick_regular = 1,
         live_lost = 2,
+        ball_hit_brick_hardened_initial = 3,
+        ball_hit_brick_indestructible = 4,
     },
     sprites = {
         ball = {
