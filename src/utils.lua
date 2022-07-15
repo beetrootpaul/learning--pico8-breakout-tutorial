@@ -37,7 +37,7 @@ local utils = {
         [[
 
 
-            -          #
+            -    #-    =
         ]],
         [[
 
@@ -45,7 +45,7 @@ local utils = {
             -------
 
 
-            -------
+            =======
         ]],
         --[[
             #-----------#
@@ -77,6 +77,7 @@ local utils = {
             tile_regular = 1,
             tile_hardened_initial = 2,
             tile_hardened_weakened = 3,
+            tile_indestructible = 4,
         },
         paddle = {
             w = 32,

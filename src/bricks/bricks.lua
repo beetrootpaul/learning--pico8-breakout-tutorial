@@ -24,8 +24,10 @@ end
 
 function new_bricks:is_any_left()
     local is_any_visible = false
-    self:for_each_visible_brick(function(brick)
-        is_any_visible = true
-    end)
+    for _, brick in pairs(self._list) do
+        if brick.visible and brick.destructible then
+            is_any_visible = true
+        end
+    end
     return is_any_visible
 end
