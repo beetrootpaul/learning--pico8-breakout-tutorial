@@ -35,8 +35,17 @@ function level_deserializer:deserialize_row(row, serialized_level_row, game_area
                 w = brick_w,
                 h = brick_h,
             }))
-        elseif brick_type == '#' then
+        elseif brick_type == '=' then
             add(output, new_brick_hardened({
+                offset_x = game_area.x,
+                offset_y = game_area.y,
+                x = initial_x + (column - 1) * (brick_w + brick_gap),
+                y = initial_y + (row - 1) * (brick_h + brick_gap),
+                w = brick_w,
+                h = brick_h,
+            }))
+        elseif brick_type == '#' then
+            add(output, new_brick_indestructible({
                 offset_x = game_area.x,
                 offset_y = game_area.y,
                 x = initial_x + (column - 1) * (brick_w + brick_gap),

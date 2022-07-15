@@ -37,7 +37,7 @@ local utils = {
         [[
 
 
-            -          #
+            -    #-    =
         ]],
         [[
 
@@ -45,7 +45,7 @@ local utils = {
             -------
 
 
-            -------
+            =======
         ]],
         --[[
             #-----------#
@@ -63,8 +63,10 @@ local utils = {
     sfxs = {
         ball_wall_bounce = 0,
         ball_paddle_bounce = 0,
-        ball_brick_bounce = 1,
+        ball_hit_brick_regular = 1,
         live_lost = 2,
+        ball_hit_brick_hardened_initial = 3,
+        ball_hit_brick_indestructible = 4,
     },
     sprites = {
         ball = {
@@ -77,6 +79,7 @@ local utils = {
             tile_regular = 1,
             tile_hardened_initial = 2,
             tile_hardened_weakened = 3,
+            tile_indestructible = 4,
         },
         paddle = {
             w = 32,

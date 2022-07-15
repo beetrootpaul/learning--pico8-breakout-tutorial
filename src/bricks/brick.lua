@@ -12,6 +12,7 @@ new_brick = setmetatable({}, {
             w = params.w,
             h = params.h,
             visible = true,
+            destructible = true,
         }
         return setmetatable(brick, { __index = self })
     end

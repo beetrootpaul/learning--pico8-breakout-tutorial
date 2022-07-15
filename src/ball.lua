@@ -183,7 +183,6 @@ function new_ball:_handle_collision_with_brick(next_x, next_y, brick)
     })
     if will_collide then
         self._score:add_points(10)
-        sfx(u.sfxs.ball_brick_bounce)
         brick:hit_by_ball()
         if bounce_horizontally then
             if next_x < brick.x + brick.w / 2 then

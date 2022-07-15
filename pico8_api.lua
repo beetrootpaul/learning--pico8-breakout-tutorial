@@ -224,6 +224,17 @@ end
 function pairs(tbl)
 end
 
+--- Set transparency for colour index to T (boolean). Transparency is observed by SPR(), SSPR(), MAP() AND TLINE()
+---
+--- PALT() resets to default: all colours opaque except colour 0.
+---
+--- When C is the only parameter, it is treated as a bitfield used to set all 16 values. For example: to set colours 0 and 1 as transparent:
+---
+--- @param c number color to set transparency for
+--- @param t boolean whether color should be treated as transparent or not, optional
+function palt(c, t)
+end
+
 --- Print a string STR and optionally set the draw colour to COL.
 --- @param str string text to print
 --- @param x number

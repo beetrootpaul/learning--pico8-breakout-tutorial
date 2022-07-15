@@ -25,7 +25,6 @@ end
 
 -- TODO custom menu item to skip level?
 
--- TODO hardened brick 1st hit SFX
 -- TODO explosive brick do not count more than 2nd hit towards combo
 -- TODO explosive brick do not break combo chain on 1st hit
 
@@ -37,7 +36,6 @@ end
 -- TODO explosive brick do not count more than 1 towards combo? or do they?
 -- TODO explosive brick count as single hit towards hardened bricks and makes other explosives explode
 
--- TODO indestructible brick (not counted towards level completion)
 -- TODO indestructible brick: do not count towards combo, but also do not lose combo chain
 
 -- TODO power-up type of a brick (randomly chosen type? under random bricks or not?)
@@ -87,8 +85,6 @@ end
 -- TODO sash UI: level starts, pick up taken (i.e. +1 heart)
 -- TODO sash UI: what with one message appearing while previous one still lasts?
 -- TODO sash UI: when high combo, with random texts
-
--- TODO mention LazyDevs's version in README: https://www.lexaloffle.com/bbs/?pid=53977#p
 
 -- TODO publish on BBS, link to it in README
 -- TODO publish on itch, link to it in README

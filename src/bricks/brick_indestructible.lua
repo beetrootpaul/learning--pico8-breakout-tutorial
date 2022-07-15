@@ -1,4 +1,4 @@
-new_brick_regular = setmetatable({}, {
+new_brick_indestructible = setmetatable({}, {
     __call = function(self, params)
         local brick = new_brick({
             offset_x = params.offset_x,
@@ -8,19 +8,22 @@ new_brick_regular = setmetatable({}, {
             w = params.w,
             h = params.h,
         })
+        brick.destructible = false
         return setmetatable(brick, { __index = self })
     end
 })
 
-function new_brick_regular:draw()
-    spr(u.sprites.bricks.tile_regular,
+function new_brick_indestructible:draw()
+    palt(u.colors.black, false)
+    palt(u.colors.salmon, true)
+    spr(u.sprites.bricks.tile_indestructible,
         self._offset_x + self.x,
         self._offset_y + self.y,
         self.w / u.tile_edge_length,
         self.h / u.tile_edge_length)
+    palt()
 end
 
-function new_brick_regular:hit_by_ball()
-    self.visible = false
-    sfx(u.sfxs.ball_hit_brick_regular)
+function new_brick_indestructible:hit_by_ball()
+    sfx(u.sfxs.ball_hit_brick_indestructible)
 end

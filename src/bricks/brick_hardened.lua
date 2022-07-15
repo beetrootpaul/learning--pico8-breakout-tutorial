@@ -32,7 +32,9 @@ end
 function new_brick_hardened:hit_by_ball()
     if self._weakened then
         self.visible = false
+        sfx(u.sfxs.ball_hit_brick_regular)
     else
         self._weakened = true
+        sfx(u.sfxs.ball_hit_brick_hardened_initial)
     end
 end
