@@ -86,7 +86,5 @@ end
 -- TODO sash UI: what with one message appearing while previous one still lasts?
 -- TODO sash UI: when high combo, with random texts
 
--- TODO mention LazyDevs's version in README: https://www.lexaloffle.com/bbs/?pid=53977#p
-
 -- TODO publish on BBS, link to it in README
 -- TODO publish on itch, link to it in README
